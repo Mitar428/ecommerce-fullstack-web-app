@@ -1,0 +1,75 @@
+{% extends "products/show.html.twig" %}
+
+
+{% block title %}
+Moj profil
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container mt-5">
+
+<h2>Moj profil</h2>
+
+<table class="table table-bordered">
+
+<tr>
+    <th>Ime</th>
+    <td>{{ korisnik.ime }}</td>
+</tr>
+
+
+<tr>
+    <th>Prezime</th>
+    <td>{{ korisnik.prezime }}</td>
+</tr>
+
+
+<tr>
+    <th>Email</th>
+    <td>{{ korisnik.email }}</td>
+</tr>
+
+
+<tr>
+    <th>Telefon</th>
+    <td>{{ korisnik.telefon }}</td>
+</tr>
+
+
+<tr>
+    <th>Adresa</th>
+    <td>{{ korisnik.adresa }}</td>
+</tr>
+
+
+<tr>
+    <th>Grad</th>
+    <td>{{ korisnik.grad }}</td>
+</tr>
+
+
+<tr>
+    <th>Poštanski broj</th>
+    <td>{{ korisnik.postanski_broj }}</td>
+</tr>
+
+
+<tr>
+    <th>Uloga</th>
+    <td>{{ korisnik.uloga }}</td>
+</tr>
+
+
+<tr>
+    <th>Registrovan</th>
+    <td>{{ korisnik.datum_registracije }}</td>
+</tr>
+
+</table>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Registracija</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f4f4f4;
+        }
+
+
+        .register-box {
+            width: 100%;
+            max-width: 500px;
+            padding: 35px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        .links a {
+            text-decoration: none;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="register-box">
+
+
+<h2>Registracija</h2>
+
+
+{% if flash.error %}
+
+<div class="alert alert-danger">
+    {{ flash.error }}
+</div>
+
+{% endif %}
+
+
+{% if flash.success %}
+
+<div class="alert alert-success">
+    {{ flash.success }}
+</div>
+
+{% endif %}
+
+
+
+<form method="POST" action="{{ app_url }}/registracija">
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Ime
+</label>
+
+<input 
+type="text" 
+name="ime" 
+method="POST"
+class="form-control"
+required>
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Prezime
+</label>
+
+<input 
+type="text" 
+name="prezime" 
+method="POST"
+class="form-control"
+required>
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Email adresa
+</label>
+
+<input 
+type="email" 
+name="email" 
+class="form-control"
+required>
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Lozinka
+</label>
+
+<input 
+type="password" 
+name="lozinka" 
+class="form-control"
+required>
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Telefon
+</label>
+
+<input 
+type="text" 
+name="telefon" 
+class="form-control">
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Adresa
+</label>
+
+<input 
+type="text" 
+name="adresa" 
+class="form-control">
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Grad
+</label>
+
+<input 
+type="text" 
+name="grad" 
+class="form-control">
+
+</div>
+
+
+
+<div class="mb-3">
+
+<label class="form-label">
+Poštanski broj
+</label>
+
+<input 
+type="text" 
+name="postanski_broj" 
+class="form-control">
+
+</div>
+
+
+
+
+<button class="btn btn-success w-100">
+
+Registruj se
+
+</button>
+
+
+</form>
+
+
+
+<div class="links">
+
+<a href="{{ app_url }}/login">
+Već imate nalog? Prijavite se
+</a>
+
+</div>
+
+
+
+</div>
+
+
+</body>
+</html>

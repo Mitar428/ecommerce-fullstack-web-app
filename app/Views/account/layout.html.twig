@@ -1,0 +1,208 @@
+
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+{% block title %}
+Moj nalog
+{% endblock %}
+</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet">
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+      rel="stylesheet">
+
+
+<style>
+
+body{
+    background:#f5f5f5;
+}
+
+
+.account-sidebar{
+
+    background:#111827;
+    min-height:100vh;
+    padding:25px;
+
+}
+
+
+.account-sidebar h4{
+
+    color:white;
+    margin-bottom:30px;
+
+}
+
+
+
+.account-sidebar a{
+
+    display:block;
+    color:#cbd5e1;
+    text-decoration:none;
+    padding:12px;
+    border-radius:8px;
+    margin-bottom:5px;
+
+}
+
+
+.account-sidebar a:hover{
+
+    background:#2563eb;
+    color:white;
+
+}
+
+
+
+.content{
+
+    padding:30px;
+
+}
+
+
+
+.card{
+
+    border:none;
+    border-radius:15px;
+
+}
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+<div class="container-fluid">
+
+
+<div class="row">
+
+
+<!-- MENU -->
+
+
+<div class="col-md-3 account-sidebar">
+
+
+<h4>
+
+<i class="bi bi-person-circle"></i>
+
+Moj nalog
+
+</h4>
+
+
+
+<a href="{{ app_url }}/account">
+
+<i class="bi bi-house"></i>
+
+Dashboard
+
+</a>
+
+
+<a href="{{ app_url }}/account/orders"
+class="btn btn-success">
+
+
+<i class="bi bi-cart"></i>
+
+Moje porudžbine
+</a>
+
+
+
+
+
+<a href="{{ app_url }}/account/profile">
+
+<i class="bi bi-person"></i>
+
+Moji podaci
+
+</a>
+
+
+
+<a href="{{ app_url }}/account/addresses">
+
+<i class="bi bi-geo-alt"></i>
+
+Adrese
+
+</a>
+
+
+
+<a href="{{ app_url }}/favoriti">
+
+<i class="bi bi-heart"></i>
+
+Omiljeno
+
+</a>
+
+
+<a href="{{ app_url }}/logout">
+<i class="bi bi-box-arrow-right"></i>
+Odjava
+</a>
+</div>
+
+
+
+
+
+<!-- CONTENT -->
+
+
+<div class="col-md-9 content">
+
+
+{% block content %}
+
+{% endblock %}
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+</body>
+
+</html>
+

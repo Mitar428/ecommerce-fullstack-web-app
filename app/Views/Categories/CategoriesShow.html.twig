@@ -1,0 +1,81 @@
+{% extends "products/homeLayout.html.twig" %}
+
+{% block title %}Proizvodi{% endblock %}
+
+{% block body %}
+
+<div class="container py-5">
+
+<div class="row">
+
+{% for product in products %}
+
+<div class="col-lg-3 col-md-4 mb-4">
+
+<div class="card h-100 shadow">
+
+
+{% if product.slika starts with 'product_' %}
+
+<img src="{{ app_url }}/assets/images/products/{{ product.slika }}"
+class="card-img-top"
+alt="{{ product.naziv }}">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ product.slika }}"
+class="card-img-top"
+alt="{{ product.naziv }}">
+
+{% endif %}
+
+
+
+<div class="card-body">
+
+<h5>
+{{ product.naziv }}
+</h5>
+
+<p class="text-muted">
+{{ product.brend }}
+</p>
+
+<h4 class="text-danger">
+{{ product.cena }} RSD
+</h4>
+
+</div>
+
+<div class="card-footer bg-white">
+
+<a href="/ecommerce-shop/public/proizvod/{{ product.proizvod_id }}"
+class="btn btn-success w-100">
+
+Detalji proizvoda
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% else %}
+
+<div class="col-12">
+
+<div class="alert alert-warning">
+Nema proizvoda.
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</div>
+
+{% endblock %}

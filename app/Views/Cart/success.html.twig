@@ -1,0 +1,59 @@
+{% extends "products/homeLayout.html.twig" %}
+
+
+{% block title %}
+Uspešna porudžbina
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="container mt-5">
+
+    <div class="card shadow p-5 text-center">
+
+        <h1 class="text-success mb-4">
+            ✅ Porudžbina uspešno poslata!
+        </h1>
+
+
+        <p class="fs-5">
+            Hvala vam na kupovini.
+        </p>
+
+
+        <p>
+            Vaša porudžbina je primljena i trenutno je na čekanju obrade.
+        </p>
+
+
+        <hr>
+
+
+        <div class="mt-4">
+
+            <a href="/ecommerce-shop/public/proizvodi"
+               class="btn btn-primary me-2">
+
+                Nastavi kupovinu
+
+            </a>
+
+
+
+            <a href="/ecommerce-shop/public/orders"
+               class="btn btn-success">
+
+                Moje porudžbine
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

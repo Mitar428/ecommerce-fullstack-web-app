@@ -1,0 +1,133 @@
+{% extends "Admin/layout.html.twig" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h2>📦 Sve porudžbine</h2>
+
+{% if orders|length > 0 %}
+
+<table class="table table-bordered table-striped table-hover mt-3">
+
+<thead class="table-dark">
+<tr>
+    <th>Slika</th>
+    <th>Proizvod</th>
+    <th>Kupac</th>
+    <th>Adresa</th>
+    <th>Telefon</th>
+    <th>Količina</th>
+    <th>Cena</th>
+    <th>Ukupno</th>
+    <th>Status</th>
+    <th>Datum</th>
+    <th>Akcija</th>
+</tr>
+</thead>
+
+
+<tbody>
+
+<td>
+
+{% if item.slika starts with 'product_' %}
+
+<img src="{{ app_url }}/assets/images/products/{{ item.slika }}"
+class="card-img-top"
+alt="{{ item.naziv }}" width="100">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ item.slika }}"
+class="card-img-top"
+alt="{{ item.naziv }}" width="100">
+
+{% endif %}
+
+
+</td>
+<strong>
+{{ item.naziv }}
+</strong>
+</td>
+
+
+<td>
+{{ item.ime }} {{ item.prezime }}
+</td>
+
+
+<td>
+{{ item.adresa }}<br>
+{{ item.grad }}
+</td>
+
+
+<td>
+{{ item.telefon }}
+</td>
+
+
+<td>
+{{ item.kolicina }}
+</td>
+
+
+<td>
+{{ item.cena }} RSD
+</td>
+
+
+<td>
+<strong>
+{{ item.ukupna_cena }} RSD
+</strong>
+</td>
+
+
+<td>
+<span class="badge bg-warning">
+{{ item.status }}
+</span>
+</td>
+
+
+<td>
+{{ item.datum }}
+</td>
+
+
+<td>
+
+<a href="{{ app_url }}/account/orders/remove/{{ item.porudzbina_id }}"
+class="btn btn-danger btn-sm"
+onclick="return confirm('Da li želite da obrišete porudžbinu?')">
+
+Obriši
+
+</a>
+
+</td>
+
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+
+{% else %}
+
+<div class="alert alert-info">
+Nema porudžbina.
+</div>
+
+{% endif %}
+
+</div>
+
+{% endblock %}

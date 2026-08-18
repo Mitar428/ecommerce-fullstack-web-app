@@ -1,0 +1,90 @@
+{% extends "Admin/layout.html.twig" %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+<h2>
+Kategorije proizvoda
+</h2>
+
+
+<table class="table table-bordered table-striped mt-4">
+
+<thead>
+
+<tr>
+<th>ID</th>
+<th>Naziv kategorije</th>
+<th>Opis</th>
+<th>Akcija</th>
+</tr>
+
+</thead>
+
+
+<tbody>
+
+{% if categories|length > 0 %}
+
+
+{% for category in categories %}
+
+<tr>
+
+<td>
+{{ category.kategorija_id }}
+</td>
+
+
+<td>
+{{ category.naziv }}
+</td>
+
+
+<td>
+{{ category.opis }}
+</td>
+
+
+<td>
+
+<a href="/ecommerce-shop/public/kategorija/{{ category.kategorija_id }}"
+class="btn btn-primary">
+
+Pogledaj proizvode
+
+</a>
+
+</td>
+
+
+</tr>
+
+
+{% endfor %}
+
+
+{% else %}
+
+<tr>
+
+<td colspan="4">
+
+Nema kategorija.
+
+</td>
+
+</tr>
+
+{% endif %}
+
+
+</tbody>
+
+</table>
+
+
+</div>
+
+{% endblock %}

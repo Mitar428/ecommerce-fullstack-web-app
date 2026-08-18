@@ -1,0 +1,139 @@
+{% block users_content %}
+
+<div class="box">
+
+    <div class="box-header">
+
+        <h2>Upravljanje korisnicima</h2>
+
+    </div>
+
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Ime</th>
+                <th>Prezime</th>
+                <th>Email</th>
+                <th>Telefon</th>
+                <th>Grad</th>
+                <th>Uloga</th>
+                <th>Akcije</th>
+
+            </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+        {% for user in users %}
+
+            <tr>
+
+
+                <td>
+                    {{ user.korisnik_id }}
+                </td>
+
+
+                <td>
+                    {{ user.ime }}
+                </td>
+
+
+                <td>
+                    {{ user.prezime }}
+                </td>
+
+
+                <td>
+                    {{ user.email }}
+                </td>
+
+
+                <td>
+                    {{ user.telefon }}
+                </td>
+
+
+                <td>
+                    {{ user.grad }}
+                </td>
+
+
+                <td>
+                    {{ user.uloga }}
+                </td>
+
+
+                <td>
+
+
+                    <a href="{{ app_url }}/admin/users/edit/{{ user.korisnik_id }}">
+                        
+                        <button type="button">
+                            Izmeni
+                        </button>
+
+                    </a>
+
+
+
+                    <form 
+                        action="{{ app_url }}/admin/users/delete/{{ user.korisnik_id }}" 
+                        method="POST" 
+                        style="display:inline; margin-left:10px;"
+                    >
+
+                        <button
+                            type="submit"
+                            onclick="return confirm('Da li želite da obrišete korisnika?');"
+                            style="background:#dc3545;"
+                        >
+
+                            Obriši
+
+                        </button>
+
+                    </form>
+
+
+                </td>
+
+
+            </tr>
+
+
+        {% else %}
+
+
+            <tr>
+
+                <td colspan="8" style="text-align:center;">
+
+                    Nema korisnika.
+
+                </td>
+
+            </tr>
+
+
+        {% endfor %}
+
+
+        </tbody>
+
+
+    </table>
+
+
+</div>
+
+
+{% endblock %}

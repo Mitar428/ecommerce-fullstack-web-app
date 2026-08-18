@@ -1,0 +1,77 @@
+{% extends "products/show.html.twig" %}
+
+{% block title %}
+Moji favoriti
+{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4">❤️ Moji favoriti</h2>
+
+    {% if items|length > 0 %}
+
+    <div class="row">
+
+        {% for item in items %}
+
+        <div class="col-md-3 mb-4">
+
+            <div class="card h-100">
+
+            {% if item.slika starts with 'product_' %}
+
+            <img src="{{ app_url }}/assets/images/products/{{ item.slika }}"
+            class="card-img-top"
+            alt="{{ item.naziv }}" width="30">
+
+            {% else %}
+
+            <img src="{{ app_url }}/images/{{ item.slika }}"
+            class="card-img-top"
+            alt="{{ item.naziv }}" width="30">
+
+            {% endif %}
+
+                <div class="card-body">
+
+                    <h5 class="card-title">
+                        {{ item.naziv }}
+                    </h5>
+
+                    <p class="fw-bold text-primary">
+                        {{ item.cena }} RSD
+                    </p>
+
+                    <a href="{{ app_url }}/proizvod/{{ item.proizvod_id }}"
+                       class="btn btn-primary btn-sm">
+                        Pogledaj
+                    </a>
+
+                    <a href="{{ app_url }}/favoriti/remove/{{ item.wishlist_id }}"
+                       class="btn btn-danger btn-sm">
+                        Ukloni
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="alert alert-info">
+        Nemate nijedan proizvod u listi želja.
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

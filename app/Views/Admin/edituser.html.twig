@@ -1,0 +1,208 @@
+{% extends "Admin/layout.html.twig" %}
+
+
+{% block content %}
+
+<div class="box">
+
+
+    <div class="box-header">
+
+        <h2>Izmena korisnika</h2>
+
+    </div>
+
+
+
+    <form action="{{ app_url }}/admin/users/update/{{ user.korisnik_id }}" method="POST">
+
+
+        <div class="form-group">
+
+            <label>
+                Ime
+            </label>
+
+            <input 
+                type="text"
+                name="ime"
+                value="{{ user.ime }}"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="form-group">
+
+            <label>
+                Prezime
+            </label>
+
+            <input 
+                type="text"
+                name="prezime"
+                value="{{ user.prezime }}"
+                required
+            >
+
+        </div>
+
+
+
+
+        <div class="form-group">
+
+            <label>
+                Email
+            </label>
+
+            <input 
+                type="email"
+                name="email"
+                value="{{ user.email }}"
+                required
+            >
+
+        </div>
+
+
+
+
+        <div class="form-group">
+
+            <label>
+                Telefon
+            </label>
+
+            <input 
+                type="text"
+                name="telefon"
+                value="{{ user.telefon }}"
+            >
+
+        </div>
+
+
+
+
+        <div class="form-group">
+
+            <label>
+                Adresa
+            </label>
+
+            <input 
+                type="text"
+                name="adresa"
+                value="{{ user.adresa }}"
+            >
+
+        </div>
+
+
+
+
+        <div class="form-group">
+
+            <label>
+                Grad
+            </label>
+
+            <input 
+                type="text"
+                name="grad"
+                value="{{ user.grad }}"
+            >
+
+        </div>
+
+
+
+
+        <div class="form-group">
+
+            <label>
+                Poštanski broj
+            </label>
+
+            <input 
+                type="text"
+                name="postanski_broj"
+                value="{{ user.postanski_broj }}"
+            >
+
+        </div>
+
+
+
+
+        <div class="form-group">
+
+            <label>
+                Uloga
+            </label>
+
+
+            <select name="uloga">
+
+
+                <option value="ADMIN"
+                {% if user.uloga == 'ADMIN' %}
+                    selected
+                {% endif %}
+                >
+                    ADMIN
+                </option>
+
+
+
+                <option value="KUPAC"
+                {% if user.uloga == 'KUPAC' %}
+                    selected
+                {% endif %}
+                >
+                    KUPAC
+                </option>
+
+
+            </select>
+
+
+        </div>
+
+
+
+
+        <button type="submit">
+
+            Sačuvaj izmene
+
+        </button>
+
+
+
+        <a href="{{ app_url }}/admin/users">
+
+            <button 
+                type="button"
+                style="background:#dc3545;"
+            >
+
+                Nazad
+
+            </button>
+
+        </a>
+
+
+
+    </form>
+
+
+
+</div>
+
+
+{% endblock %}

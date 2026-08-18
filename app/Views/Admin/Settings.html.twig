@@ -1,0 +1,132 @@
+{% extends "admin/settings.layout.twig" %}
+
+
+{% block body %}
+
+<div class="container mt-5">
+
+    <h2>⚙ System Settings</h2>
+
+    <form method="POST" action="{{ app_url }}/admin/settings/update">
+
+
+        <div class="card p-4 mt-4">
+
+
+            <h4>Dashboard Settings</h4>
+
+            <div class="form-check mb-3">
+
+                <input 
+                class="form-check-input"
+                type="checkbox"
+                name="show_sales_chart"
+                {% if settings.show_sales_chart %}
+                checked
+                {% endif %}>
+
+                <label class="form-check-label">
+                    Show Sales Chart
+                </label>
+
+            </div>
+
+
+
+            <div class="form-check mb-3">
+
+                <input 
+                class="form-check-input"
+                type="checkbox"
+                name="show_latest_orders"
+                {% if settings.show_latest_orders %}
+                checked
+                {% endif %}>
+
+                <label class="form-check-label">
+                    Show Latest Orders
+                </label>
+
+            </div>
+
+
+
+            <hr>
+
+
+            <h4>Notifications</h4>
+
+
+            <div class="form-check mb-3">
+
+                <input 
+                class="form-check-input"
+                type="checkbox"
+                name="order_notification"
+                {% if settings.order_notification %}
+                checked
+                {% endif %}>
+
+                <label class="form-check-label">
+                    New Order Notification
+                </label>
+
+            </div>
+
+
+
+            <div class="form-check mb-3">
+
+                <input 
+                class="form-check-input"
+                type="checkbox"
+                name="stock_notification"
+                {% if settings.stock_notification %}
+                checked
+                {% endif %}>
+
+                <label class="form-check-label">
+                    Low Stock Notification
+                </label>
+
+            </div>
+
+
+
+            <hr>
+
+
+            <h4>Security</h4>
+
+
+            <div class="mb-3">
+
+                <label>
+                    Login Attempts
+                </label>
+
+                <input 
+                class="form-control"
+                type="number"
+                name="login_attempts"
+                value="{{ settings.login_attempts }}">
+
+            </div>
+
+
+
+            <button class="btn btn-primary">
+                Save Settings
+            </button>
+
+
+        </div>
+
+
+    </form>
+
+
+</div>
+
+
+{% endblock %}

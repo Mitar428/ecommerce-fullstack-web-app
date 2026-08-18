@@ -1,0 +1,99 @@
+{% extends "products/homeLayout.html.twig" %}
+
+{% block title %}
+{{ product.naziv }}
+{% endblock %}
+
+{% block body %}
+
+<div class="container py-5">
+
+<div class="row">
+
+<div class="col-md-5">
+
+
+{% if product.slika starts with 'product_' %}
+
+<img src="{{ app_url }}/assets/images/products/{{ product.slika }}"
+class="card-img-top"
+alt="{{ product.naziv }}">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ product.slika }}"
+class="card-img-top"
+alt="{{ product.naziv }}">
+
+{% endif %}
+
+
+<div class="col-md-7">
+
+<h2>{{ product.naziv }}</h2>
+
+<hr>
+
+<h3 class="text-danger">
+
+{{ product.cena }} RSD
+
+</h3>
+
+<p>
+
+<strong>Brend:</strong>
+
+{{ product.brend }}
+
+</p>
+
+<p>
+
+<strong>Kategorija:</strong>
+
+{{ product.kategorija }}
+
+</p>
+
+<p>
+
+<strong>Dostupno:</strong>
+
+{{ product.stanje }} kom.
+
+</p>
+
+<hr>
+
+<h5>Opis proizvoda</h5>
+
+<p>
+
+{{ product.opis }}
+
+</p>
+
+<div class="mt-4">
+
+<button class="btn btn-success btn-lg">
+
+🛒 Dodaj u korpu
+
+</button>
+
+<button class="btn btn-primary btn-lg">
+
+💳 Kupi odmah
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

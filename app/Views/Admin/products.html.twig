@@ -1,0 +1,127 @@
+{% extends "Admin/layout.html.twig" %}
+
+
+{% block content %}
+
+
+<div class="container mt-4">
+
+
+<h2>
+📦 Svi proizvodi
+</h2>
+
+
+
+{% if products|length > 0 %}
+
+
+<table class="table table-bordered table-striped mt-4">
+
+
+<thead class="table-dark">
+
+<tr>
+
+<th>Slika</th>
+<th>Naziv</th>
+<th>Cena</th>
+<th>Stanje</th>
+
+
+</tr>
+
+</thead>
+
+
+
+<tbody>
+
+
+{% for item in products %}
+
+
+<tr>
+
+
+<td>
+
+{% if item.slika starts with 'product_' %}
+
+<img src="{{ app_url }}/assets/images/products/{{ item.slika }}"
+alt="{{ item.naziv }}"
+width="100">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ item.slika }}"
+alt="{{ item.naziv }}"
+width="100">
+
+{% endif %}
+
+</td>
+
+
+
+<td>
+
+<strong>
+{{ item.naziv }}
+</strong>
+
+</td>
+
+
+
+<td>
+
+{{ item.cena }} RSD
+
+</td>
+
+
+
+<td>
+
+{{ item.stanje }}
+
+</td>
+
+
+
+
+
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</tbody>
+
+
+</table>
+
+
+
+{% else %}
+
+
+<div class="alert alert-info">
+
+Nema proizvoda.
+
+</div>
+
+
+{% endif %}
+
+
+
+</div>
+
+
+{% endblock %}

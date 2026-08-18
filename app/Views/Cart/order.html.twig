@@ -1,0 +1,277 @@
+{% extends "products/homeLayout.html.twig" %}
+
+
+{% block title %}
+Moje porudžbine
+{% endblock %}
+
+
+
+{% block body %}
+
+
+<div class="container mt-5">
+
+
+<h2 class="mb-4">
+📦 Porudžbine
+</h2>
+
+
+
+{% if order|length > 0 %}
+
+
+
+{% for item in order %}
+
+
+
+<div class="card shadow mb-4">
+
+
+<div class="card-body">
+
+
+
+<div class="row">
+
+
+
+<div class="col-md-3">
+
+{% if item.slika  starts with 'product_' %}
+
+
+<img src="{{ app_url }}/assets/images/products/{{ item.slika }}"
+class="card-img-top"
+alt="{{ item.naziv }}" width="30">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ item.slika }}"
+class="card-img-top"
+alt="{{ item.naziv }}" width="30">
+
+{% endif %}
+
+
+</div>
+
+
+
+
+<div class="col-md-9">
+
+
+
+<h4>
+{{ item.naziv }}
+</h4>
+
+
+
+
+<p>
+Količina:
+
+<strong>
+{{ item.kolicina }}
+</strong>
+
+</p>
+
+
+
+
+<p>
+Cena proizvoda:
+
+<strong>
+{{ item.cena }} RSD
+</strong>
+
+</p>
+
+
+
+
+
+<p>
+Broj porudžbine:
+
+<strong>
+#{{ item.porudzbina_id }}
+</strong>
+
+</p>
+
+
+
+
+
+<p>
+Status:
+
+<span class="badge bg-warning">
+
+{{ item.status }}
+
+</span>
+
+</p>
+
+
+
+
+
+{% if admin == true %}
+
+
+
+<hr>
+
+
+
+<h5>
+👤 Podaci kupca
+</h5>
+
+
+
+<p>
+Ime i prezime:
+
+<strong>
+{{ item.ime }} {{ item.prezime }}
+</strong>
+
+</p>
+
+
+
+
+<p>
+Adresa:
+
+{{ item.adresa }}
+
+</p>
+
+
+
+
+<p>
+Grad:
+
+{{ item.grad }}
+
+</p>
+
+
+
+
+<p>
+Telefon:
+
+{{ item.telefon }}
+
+</p>
+
+
+
+
+<p>
+Ukupna cena porudžbine:
+
+<strong>
+{{ item.ukupna_cena }} RSD
+</strong>
+
+</p>
+
+
+
+
+<a href="{{ app_url }}/admin/orders/remove/{{ item.porudzbina_id }}"
+class="btn btn-danger"
+onclick="return confirm('Da li želite da obrišete ovu porudžbinu kao admin?')">
+
+🗑 Obriši porudžbinu
+
+</a>
+
+
+
+
+
+{% else %}
+
+
+
+<a href="{{ app_url }}/account/orders/remove/{{ item.porudzbina_id }}"
+class="btn btn-danger"
+onclick="return confirm('Da li želite da obrišete svoju porudžbinu?')">
+
+🗑 Obriši moju porudžbinu
+
+</a>
+
+
+
+
+{% endif %}
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+
+<div class="alert alert-info">
+
+Nemate porudžbina.
+
+</div>
+
+
+
+{% endif %}
+
+
+
+
+<a href="{{ app_url }}/proizvodi"
+class="btn btn-primary mt-3">
+
+Nastavi kupovinu
+
+</a>
+
+
+
+</div>
+
+
+
+{% endblock %}

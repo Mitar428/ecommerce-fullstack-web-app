@@ -1,0 +1,109 @@
+{% extends "products/homeLayout.html.twig" %}
+
+{% block title %}Korpa{% endblock %}
+
+{% block body %}
+
+<div class="container mt-5">
+
+<h2>Moja korpa</h2>
+
+<table class="table table-bordered">
+
+<thead>
+
+<tr>
+
+<th>Slika</th>
+<th>Proizvod</th>
+<th>Cena</th>
+<th>Količina</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+ {% set ukupno = 0 %}
+
+
+{% for item in items %}
+
+<tr>
+
+<td>
+
+
+{% if item.slika starts with 'product_' %}
+
+
+<img src="{{ app_url }}/assets/images/products/{{ item.slika }}"
+class="card-img-top"
+alt="{{ item.naziv }}"width="30">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ item.slika }}"
+class="card-img-top"
+alt="{{ item.naziv }}"width=30">
+
+{% endif %}
+
+
+</td>
+
+<td>{{ item.naziv }}</td>
+
+<td>{{ item.cena }} RSD</td>
+
+<td>{{ item.kolicina }}</td>
+
+<td>{{item.cena * item.kolicina}} RSD </td>
+
+
+<td>
+
+
+<a href="{{ app_url }}/Cart/remove/{{ item.korpa_id }}"
+   class="btn btn-danger btn-sm">
+
+    Obriši
+
+</a>
+
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+{% set ukupno= ukupno + (item.cena * item.kolicina) %}
+
+
+<td colspan="4">
+
+Korpa je prazna.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+<a href="/ecommerce-shop/public/checkout"
+class="btn btn-success btn-lg">
+
+Nastavi kupovinu
+
+</a>
+
+</div>
+
+{% endblock %}

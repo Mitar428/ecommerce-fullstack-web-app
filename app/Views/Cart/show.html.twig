@@ -1,0 +1,202 @@
+{% extends "products/homeLayout.html.twig" %}
+
+
+{% block title %}
+Korpa
+{% endblock %}
+
+
+
+{% block body %}
+
+<div class="container py-5">
+
+
+<h2 class="mb-4">
+🛒 Vaša korpa
+</h2>
+
+
+
+{% if items|length > 0 %}
+
+
+<div class="row">
+
+
+{% for item in items %}
+
+
+<div class="col-md-6 mb-4">
+
+
+<div class="card shadow">
+
+
+<div class="row g-0">
+
+
+<div class="col-md-4">
+
+
+{% if item.slika %}
+
+
+    <td>
+
+{% if item.slika starts with 'product_' %}
+
+<img src="{{ app_url }}/assets/images/products/{{ item.slika }}"
+class="card-img-top"
+alt="{{ item.naziv }}" width="100">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ item.slika }}"
+class="card-img-top"
+alt="{{ item.naziv }}" width="100">
+
+{% endif %}
+
+
+</td>
+
+
+
+</div>
+
+
+
+<div class="col-md-8">
+
+
+<div class="card-body">
+
+
+<h4>
+{{ item.naziv }}
+</h4>
+
+
+<p class="text-danger fs-5">
+
+{{ item.cena }} RSD
+
+</p>
+
+
+
+<p>
+
+Količina:
+
+<strong>
+{{ item.kolicina }}
+</strong>
+
+</p>
+
+
+
+<p>
+
+Ukupno:
+
+<strong>
+{{ item.cena * item.kolicina }} RSD
+</strong>
+
+</p>
+
+
+
+<form method="POST"
+action="/ecommerce-shop/public/cart/remove/{{ item.korpa_id }}">
+
+
+<button class="btn btn-danger">
+
+Obriši
+
+</button>
+
+
+</form>
+
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+{% endfor %}
+
+
+</div>
+
+
+
+<div class="text-end mt-4">
+
+
+<h3>
+
+Ukupno:
+
+{% set suma = 0 %}
+
+
+{% for item in items %}
+
+{% set suma = suma + (item.cena * item.kolicina) %}
+
+{% endfor %}
+
+
+{{ suma }} RSD
+
+
+</h3>
+
+
+
+<a href="/ecommerce-shop/public/checkout"
+class="btn btn-success btn-lg">
+
+Nastavi kupovinu
+
+</a>
+
+
+</div>
+
+
+
+{% else %}
+
+
+<div class="alert alert-warning">
+
+Korpa je prazna.
+
+</div>
+
+
+{% endif %}
+
+
+
+</div>
+
+
+{% endblock %}

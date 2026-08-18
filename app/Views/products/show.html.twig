@@ -1,0 +1,612 @@
+{% extends "products/homeLayout.html.twig" %}
+
+
+{% block title %}
+{{ product.naziv }}
+{% endblock %}
+
+
+
+{% block body %}
+
+
+<div class="container mt-5">
+
+
+<div class="row">
+
+
+
+<!-- SLIKA PROIZVODA -->
+
+<div class="col-md-5">
+
+
+<div class="card shadow-sm">
+
+
+{% if product.slika starts with 'product_' %}
+
+<img src="{{ app_url }}/assets/images/products/{{ product.slika }}"
+class="card-img-top"
+alt="{{ product.naziv }}">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ product.slika }}"
+class="card-img-top"
+alt="{{ product.naziv }}">
+
+{% endif %}
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<!-- INFORMACIJE -->
+
+<div class="col-md-7">
+
+
+
+<h1 class="fw-bold">
+
+{{ product.naziv }}
+
+</h1>
+
+
+
+<div class="mb-3">
+
+
+<span class="badge bg-primary">
+
+{{ product.brend }}
+
+</span>
+
+
+<span class="badge bg-secondary">
+
+{{ product.kategorija }}
+
+</span>
+
+
+</div>
+
+
+
+
+
+<h2 class="text-success fw-bold">
+
+{{ product.cena|number_format(2, ',', '.') }} RSD
+
+</h2>
+
+
+
+
+<p class="mt-4">
+
+{{ product.opis }}
+
+</p>
+
+
+
+<hr>
+
+
+
+
+
+<form action="{{ app_url }}/Cart/add"
+method="POST">
+
+
+<input type="hidden"
+name="proizvod_id"
+value="{{ product.proizvod_id }}">
+
+
+
+<label class="form-label">
+
+Količina:
+
+</label>
+
+
+
+<input type="number"
+name="kolicina"
+value="1"
+min="1"
+max="{{ product.stanje }}"
+class="form-control mb-3"
+style="width:120px;">
+
+
+
+
+<button class="btn btn-primary btn-lg">
+
+🛒 Dodaj u korpu
+
+</button>
+
+
+
+</form>
+
+
+
+
+
+<form action="{{ app_url }}/favoriti/dodaj/{{ product.proizvod_id }}"
+method="POST"
+class="mt-3">
+
+
+<button type="submit" class="btn btn-outline-danger">
+
+❤️ Wishlist
+
+</button>
+
+
+</form>
+
+
+
+
+
+<hr>
+
+
+
+<h4>
+Ostavi recenziju
+</h4>
+
+
+
+<form method="POST"
+action="{{ app_url }}/review/store/{{ product.proizvod_id }}">
+
+
+<select name="ocena"
+class="form-control mb-2"
+style="width:200px;">
+
+
+<option value="5">
+⭐⭐⭐⭐⭐
+</option>
+
+
+<option value="4">
+⭐⭐⭐⭐
+</option>
+
+
+<option value="3">
+⭐⭐⭐
+</option>
+
+
+<option value="2">
+⭐⭐
+</option>
+
+
+<option value="1">
+⭐
+</option>
+
+
+</select>
+
+
+
+<textarea 
+name="komentar"
+class="form-control mb-2"
+placeholder="Napiši komentar">
+</textarea>
+
+
+
+<button type="submit"
+class="btn btn-success">
+
+Pošalji recenziju
+
+</button>
+
+
+
+</form>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- RECENZIJE -->
+
+
+<div class="mt-5">
+
+
+<h3>
+
+Recenzije kupaca
+
+</h3>
+
+
+
+{% if reviews|length > 0 %}
+
+
+
+{% for review in reviews %}
+
+
+
+<div class="card mt-3 shadow-sm">
+
+
+<div class="card-body">
+
+
+<h5>
+
+{{ review.ime }} {{ review.prezime }}
+
+</h5>
+
+
+
+<p>
+
+
+{% if review.ocena == 5 %}
+
+⭐⭐⭐⭐⭐
+
+
+{% elseif review.ocena == 4 %}
+
+⭐⭐⭐⭐
+
+
+{% elseif review.ocena == 3 %}
+
+⭐⭐⭐
+
+
+{% elseif review.ocena == 2 %}
+
+⭐⭐
+
+
+{% else %}
+
+⭐
+
+
+{% endif %}
+
+
+</p>
+
+
+
+
+<p>
+
+{{ review.komentar }}
+
+</p>
+
+
+
+
+<small class="text-muted">
+
+{{ review.datum }}
+
+</small>
+
+
+
+</div>
+
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+<div class="alert alert-info mt-3">
+
+Nema još recenzija za ovaj proizvod.
+
+</div>
+
+
+
+{% endif %}
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- SPECIFIKACIJE -->
+
+
+<div class="card mt-5 shadow-sm">
+
+
+<div class="card-header bg-dark text-white">
+
+
+<h4>
+
+Specifikacija proizvoda
+
+</h4>
+
+
+</div>
+
+
+
+<div class="card-body">
+
+
+<table class="table table-striped">
+
+
+<tbody>
+
+
+
+<tr>
+
+<th>
+Naziv
+</th>
+
+
+<td>
+{{ product.naziv }}
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<th>
+Brend
+</th>
+
+
+<td>
+{{ product.brend }}
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<th>
+Kategorija
+</th>
+
+
+<td>
+{{ product.kategorija }}
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<th>
+Cena
+</th>
+
+
+<td class="text-success fw-bold">
+
+{{ product.cena|number_format(2, ',', '.') }} RSD
+
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<th>
+Stanje
+</th>
+
+
+<td>
+
+{{ product.stanje }} komada
+
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<th>
+Garancija
+</th>
+
+
+<td>
+
+24 meseca
+
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<th>
+Šifra proizvoda
+</th>
+
+
+<td>
+
+{{ product.proizvod_id }}
+
+</td>
+
+
+</tr>
+
+
+
+</tbody>
+
+
+</table>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- OPIS -->
+
+
+<div class="card mt-4 shadow-sm">
+
+
+<div class="card-header">
+
+
+<h4>
+
+Opis proizvoda
+
+</h4>
+
+
+</div>
+
+
+
+<div class="card-body">
+
+
+<p>
+
+{{ product.opis }}
+
+</p>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="mt-4 mb-5">
+
+
+<a href="{{ app_url }}/proizvodi"
+class="btn btn-secondary">
+
+← Nazad na proizvode
+
+</a>
+
+
+</div>
+
+
+
+</div>
+
+
+
+{% endblock %}

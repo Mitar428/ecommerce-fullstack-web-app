@@ -1,0 +1,451 @@
+{% extends "Admin/layout.html.twig" %}
+
+{% block content %}
+
+
+<div class="admin-wrapper">
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <h2>E-Shop Admin</h2>
+        </div>
+
+
+        <ul>
+
+            <li class="active">
+                <a href="{{ app_url }}/admin">
+                    <i>📊</i> Dashboard
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{{ app_url }}/admin/products">
+                    📦 Proizvodi
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{{ app_url }}/admin/categories">
+                    🗂 Kategorije
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{{ app_url }}/admin/orders">
+                    🛒 Porudžbine
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{{ app_url }}/admin/users">
+                    👥 Korisnici
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{{ app_url }}/admin/admins/create">
+                    👤 Dodaj administratora
+                </a>
+            </li>
+
+
+            <li>
+                <a href="{{ app_url }}/admin/settings">
+                    ⚙ Podešavanja
+                </a>
+            </li>
+
+
+            <li class="logout">
+
+                <a href="{{ app_url }}/logout">
+                    🚪 Logout
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+    </aside>
+
+
+
+
+
+    <main class="content">
+
+
+
+        <div class="topbar">
+
+            <h1>Dashboard</h1>
+
+            <div class="admin-user">
+                Admin
+            </div>
+
+        </div>
+
+
+
+
+
+        <!-- STAT CARDS -->
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>Ukupno proizvoda</h3>
+
+                <p>
+                    {{ products_count }}
+                </p>
+
+            </div>
+
+
+
+
+            <div class="card">
+
+                <h3>Porudžbine</h3>
+
+                <p>
+                    {{ orders_count }}
+                </p>
+
+            </div>
+
+
+
+
+            <div class="card">
+
+                <h3>Korisnici</h3>
+
+                <p>
+                    {{ users_count }}
+                </p>
+
+            </div>
+
+
+
+
+            <div class="card">
+
+                <h3>Prihod</h3>
+
+                <p>
+                    {{ revenue }} RSD
+                </p>
+
+            </div>
+
+
+
+        </div>
+
+
+
+
+
+
+        <!-- RECENT ORDERS -->
+
+
+        <div class="box">
+
+
+            <div class="box-header">
+
+                <h2>Poslednje porudžbine</h2>
+
+
+                <a href="{{ app_url }}/admin/orders">
+                    Sve porudžbine
+                </a>
+
+
+            </div>
+
+
+
+
+            <table>
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Kupac</th>
+                        <th>Telefon</th>
+                        <th>Status</th>
+                        <th>Iznos</th>
+
+                    </tr>
+
+                </thead>
+
+
+
+
+                <tbody>
+
+
+                {% for order in orders %}
+
+
+                    <tr>
+
+
+                        <td>
+                            #{{ order.id }}
+                        </td>
+
+
+                        <td>
+                            {{ order.customer_name }}
+                        </td>
+
+
+                        <td>
+                            {{ order.email }}
+                        </td>
+
+
+                        <td>
+
+
+                            {% if order.status == "Isporučeno" %}
+
+                                <span class="success">
+                                    Isporučeno
+                                </span>
+
+
+                            {% elseif order.status == "Poslato" %}
+
+                                <span class="success">
+                                    Poslato
+                                </span>
+
+
+                            {% elseif order.status == "U obradi" %}
+
+                                <span class="warning">
+                                    U obradi
+                                </span>
+
+
+                            {% elseif order.status == "Na čekanju" %}
+
+                                <span class="warning">
+                                    Na čekanju
+                                </span>
+
+
+                            {% else %}
+
+                                <span class="danger">
+                                    {{ order.status }}
+                                </span>
+
+
+                            {% endif %}
+
+
+
+                        </td>
+
+
+
+                        <td>
+                            {{ order.total }} RSD
+                        </td>
+
+
+                    </tr>
+
+
+
+                {% else %}
+
+
+                    <tr>
+
+                        <td colspan="5">
+                            Nema porudžbina
+                        </td>
+
+                    </tr>
+
+
+                {% endfor %}
+
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+
+
+
+
+
+
+        <!-- PRODUCTS -->
+
+
+        <div class="box">
+
+
+            <div class="box-header">
+
+
+                <h2>Najnoviji proizvodi</h2>
+
+
+                <a href="{{ app_url }}/admin/proizvodi/dodaj">
+                    Dodaj proizvod
+                </a>
+
+
+            </div>
+
+
+
+
+
+
+            <table>
+
+
+                <thead>
+
+
+                    <tr>
+
+                        <th>Naziv</th>
+                        <th>Kategorija</th>
+                        <th>Cena</th>
+                        <th>Akcija</th>
+
+                    </tr>
+
+
+                </thead>
+
+
+
+
+
+                <tbody>
+
+
+
+                {% for product in latest_products %}
+
+
+                    <tr>
+
+
+                        <td>
+                            {{ product.name }}
+                        </td>
+
+
+
+                        <td>
+                            {{ product.category }}
+                        </td>
+
+
+
+                        <td>
+                            {{ product.price }} RSD
+                        </td>
+
+
+
+
+                        <td>
+
+
+                            <a class="remove"
+                               href="{{ app_url }}/admin/orders/remove/{{ product.id }}">
+                                Obriši
+                            </a>
+
+
+                        </td>
+
+
+
+                    </tr>
+
+
+
+                {% else %}
+
+
+
+                    <tr>
+
+                        <td colspan="4">
+                            Nema proizvoda
+                        </td>
+
+                    </tr>
+
+
+
+                {% endfor %}
+
+
+
+                </tbody>
+
+
+
+            </table>
+
+
+
+        </div>
+
+
+
+
+    </main>
+
+
+
+</div>
+
+
+
+{% endblock %}

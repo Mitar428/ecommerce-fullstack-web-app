@@ -1,0 +1,19 @@
+{
+    "name": "ecommerce/shop",
+    "description": "web shop",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Ecommerce\\Shop\\": "app/"
+        }
+    },
+    "require": {
+        "monolog/monolog": "2.10",
+        "twig/twig": "3.10"
+    },
+    "config": {
+        "audit": {
+            "block-insecure": false
+        }
+    }
+}

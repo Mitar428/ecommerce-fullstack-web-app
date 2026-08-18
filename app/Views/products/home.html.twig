@@ -1,0 +1,451 @@
+
+
+<!DOCTYPE html>
+<html lang="sr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>E-Shop</title>
+
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+
+</head>
+
+
+<body class="bg-light">
+
+
+<!-- HEADER -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+<div class="container">
+
+
+<a class="navbar-brand fw-bold fs-3" href="/ecommerce-shop/public/">
+
+E-Shop
+
+</a>
+
+
+
+<div class="navbar-nav">
+
+
+<a class="nav-link active"
+href="/ecommerce-shop/public/">
+
+Početna
+
+</a>
+
+
+
+<a class="nav-link"
+href="/ecommerce-shop/public/proizvodi">
+
+Proizvodi
+
+</a>
+
+
+
+<a href="{{ app_url }}/o-nama" class="nav-link">
+
+O nama
+
+</a>
+
+
+
+<a class="nav-link"
+href="/ecommerce-shop/public/favoriti">
+
+Wishlist ❤️
+
+</a>
+
+
+
+<a class="nav-link"
+href="/ecommerce-shop/public/korpa">
+
+Korpa 🛒
+
+</a>
+
+
+</div>
+
+
+
+
+<div>
+
+
+<a href="/ecommerce-shop/public/login"
+class="btn btn-outline-light me-2">
+
+Prijava
+
+</a>
+
+
+
+<a href="/ecommerce-shop/public/registracija"
+class="btn btn-primary">
+
+Registracija
+
+</a>
+
+
+</div>
+
+
+</div>
+
+</nav>
+
+
+
+
+
+<section class="bg-white py-5">
+
+
+<div class="container text-center">
+
+
+<h1 class="fw-bold">
+
+Dobrodošli u E-Shop
+
+</h1>
+
+
+<p class="text-muted">
+
+Najbolji računari i oprema na jednom mestu.
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+<div class="container mt-5">
+
+
+<h2 class="mb-4 fw-bold">
+
+Najnoviji proizvodi
+
+</h2>
+
+
+
+<div class="row">
+
+
+
+{% for product in products %}
+
+
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+
+<div class="card shadow-sm h-100">
+
+
+
+{% if product.slika starts with 'product_' %}
+
+<img src="{{ app_url }}/assets/images/products/{{ product.slika }}"
+class="card-img-top"
+alt="{{ product.naziv }}">
+
+{% else %}
+
+<img src="{{ app_url }}/images/{{ product.slika }}"
+class="card-img-top"
+alt="{{ product.naziv }}">
+
+{% endif %}
+
+
+
+
+<div class="card-body">
+
+
+<h5 class="card-title">
+
+{{ product.naziv }}
+
+</h5>
+
+
+
+
+<p class="text-muted">
+
+{{ product.opis }}
+
+</p>
+
+
+
+
+<p>
+
+<strong>Brend:</strong>
+
+{{ product.brend }}
+
+</p>
+
+
+
+
+<p>
+
+<strong>Kategorija:</strong>
+
+{{ product.kategorija }}
+
+</p>
+
+
+
+
+<h4 class="text-success">
+
+{{ product.cena }} RSD
+
+</h4>
+
+
+
+
+</div>
+
+
+
+
+
+<div class="card-footer bg-white">
+
+
+
+<a href="/ecommerce-shop/public/proizvod/{{ product.proizvod_id }}"
+class="btn btn-dark">
+
+Detalji
+
+</a>
+
+
+
+
+
+<form action="/ecommerce-shop/public/Cart/add"
+method="POST"
+class="d-inline">
+
+
+<input type="hidden"
+name="proizvod_id"
+value="{{ product.proizvod_id }}">
+
+
+
+<button class="btn btn-primary">
+
+Dodaj u korpu
+
+</button>
+
+
+</form>
+
+<form action="{{ app_url }}/favoriti/dodaj/{{ product.proizvod_id }}"
+method="POST"
+class="d-inline">
+
+
+<button type="submit" class="btn btn-outline-danger">
+
+❤️ Wishlist
+
+</button>
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+{% else %}
+
+
+
+<div class="alert alert-warning">
+
+Nema proizvoda.
+
+</div>
+
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+
+
+<!-- PAGINACIJA -->
+
+
+<nav class="mt-4">
+
+
+<ul class="pagination justify-content-center">
+
+
+
+{% for i in 1..totalPages %}
+
+
+
+<li class="page-item
+
+{% if i == page %}
+
+active
+
+{% endif %}
+
+">
+
+
+
+<a class="page-link"
+
+href="/ecommerce-shop/public/?page={{ i }}">
+
+
+{{ i }}
+
+
+</a>
+
+
+
+</li>
+
+
+
+{% endfor %}
+
+
+
+
+</ul>
+
+
+</nav>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<footer class="bg-dark text-white mt-5">
+
+
+<div class="container text-center p-4">
+
+
+<h5>
+
+E-Shop
+
+</h5>
+
+
+<p>
+
+Online prodavnica računarske opreme
+
+</p>
+
+
+<p class="mb-0">
+
+© 2026 Sva prava zadržana
+
+</p>
+
+
+</div>
+
+
+</footer>
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+</body>
+
+</html>
+
+

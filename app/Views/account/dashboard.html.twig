@@ -1,0 +1,311 @@
+{% extends "account/layout.html.twig" %}
+
+
+{% block title %}
+
+Moj nalog
+
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+<div class="container mt-4">
+
+
+<h2>
+
+Zdravo, {{ customer.ime|default('Kupac') }} 👋
+
+</h2>
+
+
+<p class="text-muted">
+
+Dobrodošli u vaš korisnički panel.
+
+</p>
+
+
+
+
+
+<div class="row mt-4">
+
+
+
+<div class="col-md-4">
+
+
+<div class="card shadow-sm">
+
+
+<div class="card-body">
+
+
+<h6>
+
+Moje porudžbine
+
+</h6>
+
+
+<h2>
+
+{{ porudzbine|length }}
+
+</h2>
+
+
+
+<a href="/ecommerce-shop/public/account/orders"
+class="btn btn-success">
+
+📦 Moje porudžbine
+
+</a>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="col-md-4">
+
+
+<div class="card shadow-sm">
+
+
+<div class="card-body">
+
+
+<h6>
+
+Ukupna kupovina
+
+</h6>
+
+
+<h2>
+
+{% set ukupno = 0 %}
+
+{% for order in porudzbine %}
+
+{% set ukupno = ukupno + order.ukupna_cena %}
+
+{% endfor %}
+
+
+{{ ukupno }} RSD
+
+
+</h2>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="col-md-4">
+
+
+<div class="card shadow-sm">
+
+
+<div class="card-body">
+
+
+<h6>
+
+Član od
+
+</h6>
+
+
+<h5>
+
+{{ customer.datum_registracije|default('')|date('d.m.Y') }}
+
+</h5>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="card shadow-sm mt-4">
+
+
+
+<div class="card-header">
+
+Poslednje porudžbine
+
+</div>
+
+
+
+
+
+<div class="card-body">
+
+
+
+<table class="table table-striped">
+
+
+<thead>
+
+<tr>
+
+<th>Broj</th>
+
+<th>Datum</th>
+
+<th>Status</th>
+
+<th>Iznos</th>
+
+</tr>
+
+</thead>
+
+
+
+
+<tbody>
+
+
+
+{% for order in porudzbine %}
+
+
+
+<tr>
+
+
+<td>
+
+#{{ order.porudzbina_id }}
+
+</td>
+
+
+
+
+<td>
+
+{{ order.datum|date('d.m.Y H:i') }}
+
+</td>
+
+
+
+
+<td>
+
+{{ order.status }}
+
+</td>
+
+
+
+
+<td>
+
+{{ order.ukupna_cena }} RSD
+
+</td>
+
+
+
+</tr>
+
+
+
+
+{% else %}
+
+
+
+<tr>
+
+<td colspan="4" class="text-center">
+
+Nemate porudžbine.
+
+</td>
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}
